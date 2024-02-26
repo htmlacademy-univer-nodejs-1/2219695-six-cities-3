@@ -6,7 +6,7 @@ import {OfferType} from '../../types/offer-type.enum';
 import {Amenity} from '../../types/amenity.enum';
 import {UserType} from '../../types/user-type.enum';
 
-export class TsvFileReader implements FileReader {
+export class TSVFileReader implements FileReader {
   private rawData = '';
 
   constructor(private readonly filename: string) {}
