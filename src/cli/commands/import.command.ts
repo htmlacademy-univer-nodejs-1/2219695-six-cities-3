@@ -1,5 +1,5 @@
-import {Command} from './command.interface';
-import {TSVFileReader} from '../../shared/libs/file-reader';
+import {Command} from './command.interface.js';
+import {TSVFileReader} from '../../shared/libs/file-reader/index.js';
 import chalk from 'chalk';
 
 export class ImportCommand implements Command {
