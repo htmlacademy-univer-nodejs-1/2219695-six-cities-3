@@ -1,5 +1,6 @@
 import {Command} from './command.interface';
 import {TSVFileReader} from '../../shared/libs/file-reader';
+import chalk from 'chalk';
 
 export class ImportCommand implements Command {
   public getName(): string {
@@ -18,8 +19,8 @@ export class ImportCommand implements Command {
         throw error;
       }
 
-      console.error(`Can't import data from file: ${filename}`);
-      console.error(`Details: ${error.message}`);
+      console.error(chalk.red(`Can't import data from file: ${filename}`));
+      console.error(chalk.red(`Details: ${error.message}`));
     }
   }
 }
