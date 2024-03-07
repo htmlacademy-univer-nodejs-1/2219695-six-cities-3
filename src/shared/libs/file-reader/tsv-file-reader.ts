@@ -16,11 +16,15 @@ export class TSVFileReader implements FileReader {
       throw new Error('File was not read');
     }
 
-    return this.rawData
-      .split('\n')
-      .filter((row) => row.trim().length > 0)
-      .map((line) => line.split('\t'))
-      .map(([title,
+    const offers: Offer[] = [];
+
+    for (const row of this.rawData.split('\n')) {
+      if (row.trim().length === 0) {
+        continue;
+      }
+
+      const [
+        title,
         description,
         createdDate,
         city,
@@ -39,7 +43,10 @@ export class TSVFileReader implements FileReader {
         avatar,
         password,
         userType,
-        coordinates]) => ({
+        coordinates
+      ] = row.split('\t');
+
+      const offer: Offer = {
         title,
         description,
         postDate: new Date(createdDate),
@@ -68,6 +75,11 @@ export class TSVFileReader implements FileReader {
           latitude: Number.parseFloat(coordinates.split(';')[0]),
           longitude: Number.parseFloat(coordinates.split(';')[1])
         }
-      }));
+      };
+
+      offers.push(offer);
+    }
+
+    return offers;
   }
 }
