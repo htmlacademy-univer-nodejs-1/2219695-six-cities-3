@@ -43,25 +43,25 @@ export class TSVFileReader implements FileReader {
         title,
         description,
         postDate: new Date(createdDate),
-        city: City[city as 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf'],
+        city: city as City,
         previewImage,
         photos: photos.split(';'),
         premium: premium.toLowerCase() === 'true',
         favorite: favorite.toLowerCase() === 'true',
         rating: Number.parseInt(rating, 10),
-        type: OfferType[type as 'Apartment' | 'House' | 'Room' | 'Hotel'],
+        type: type as OfferType,
         roomCount: Number.parseInt(roomCount, 10),
         guestCount: Number.parseInt(guestCount, 10),
         price: Number.parseInt(price, 10),
         amenities: amenities
           .split(';')
-          .map((amenity) => Amenity[amenity as 'Breakfast' | 'AirConditioning' | 'LaptopFriendlyWorkspace' | 'BabySeat' | 'Washer' | 'Towels' | 'Fridge']),
+          .map((amenity) => amenity as Amenity),
         user: {
           name,
           email,
           avatar,
           password,
-          type: UserType[userType as 'Normal' | 'Pro']
+          type: userType as UserType
         },
         commentCount: 0,
         coordinates: {
