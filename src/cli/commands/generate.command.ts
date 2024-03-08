@@ -31,7 +31,7 @@ export class GenerateCommand implements Command {
     return '--generate';
   }
 
-  public async execute(...parameters) {
+  public async execute(...parameters: string[]) {
     const [count, filepath, url] = parameters;
     const offerCount = Number.parseInt(count, 10);
 
