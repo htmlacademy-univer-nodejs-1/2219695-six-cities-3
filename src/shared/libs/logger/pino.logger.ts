@@ -1,11 +1,22 @@
 import {Logger} from './logger.interface.js';
-import {Logger as PinoInstance, pino} from 'pino';
+import {Logger as PinoInstance, pino, transport} from 'pino';
+import {gerCurrentModuleDirectoryPath} from '../../helpers/index.js';
+import {resolve} from 'node:path';
 
 export class PinoLogger implements Logger {
   private readonly logger: PinoInstance;
 
   constructor() {
-    this.logger = pino();
+    const modulePath = gerCurrentModuleDirectoryPath();
+    const logFilePath = 'logs/rest.log';
+    const destination = resolve(modulePath, '../../../', logFilePath);
+
+    const fileTransport = transport({
+      target: 'pino/file',
+      options: {destination}
+    });
+
+    this.logger = pino({}, fileTransport);
   }
 
   info(message: string, ...args: unknown[]): void {
