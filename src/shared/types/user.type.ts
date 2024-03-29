@@ -3,7 +3,7 @@ import {UserType} from './user-type.enum';
 export type User = {
   name: string;
   email: string;
-  avatar: string; //TODO: Возможно стоит сделать сделать не обязательным на уровне типа
+  avatar: string;
   password: string;
   type: UserType;
 }
