@@ -12,6 +12,7 @@ export class DefaultUserService implements UserService {
     @inject(Component.Logger) private readonly logger: Logger,
     @inject(Component.UserModel) private readonly userModel: types.ModelType<UserEntity>
   ) {}
+
   public async create(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity>> {
     const user = new UserEntity(dto);
     user.setPassword(dto.password, salt);
@@ -24,6 +25,10 @@ export class DefaultUserService implements UserService {
 
   public async findByEmail(email: string): Promise<DocumentType<UserEntity> | null> {
     return this.userModel.findOne({email});
+  }
+
+  public async findById(id: string): Promise<DocumentType<UserEntity> | null> {
+    return this.userModel.findOne({id});
   }
 
   public async findOrCreate(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity>> {
