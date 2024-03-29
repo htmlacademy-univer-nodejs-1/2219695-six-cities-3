@@ -46,7 +46,7 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({
     required: true,
     default: [],
-    type: () => [String],
+    type: () => Array<string>,
   })
   public photos: string[];
 
@@ -95,14 +95,14 @@ export class OfferEntity extends defaultClasses.TimeStamps {
 
   @prop({
     required: true,
-    type: () => [String],
-    enum: Amenity
+    type: () => Array<string>,
   })
   public amenities: Amenity[];
 
   @prop({
     required: true,
-    ref: UserEntity
+    ref: UserEntity,
+    type: () => String
   })
   public userId: Ref<UserEntity>;
 
