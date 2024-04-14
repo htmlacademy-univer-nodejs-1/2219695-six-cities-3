@@ -33,7 +33,7 @@ export class DefaultOfferService implements OfferService {
     const limit = count ?? DEFAULT_OFFER_COUNT;
     return this.offerModel
       .find()
-      .sort({postDate: SortType.Down})
+      .sort({createdAt: SortType.Down})
       .limit(limit)
       .populate('userId')
       .exec();
