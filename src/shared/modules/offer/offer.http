@@ -4,3 +4,27 @@ GET http://localhost:5000/offers HTTP/1.1
 Content-Type: application/json
 
 ###
+
+## Создать предложение
+POST http://localhost:5000/offers HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "titletitle",
+  "description": "descriptiondescription",
+  "city": "City",
+  "postDate": "123",
+  "previewImage": "img",
+  "photos": ["photo1"],
+  "premium": true,
+  "favorite": true,
+  "rating": 1,
+  "type": "apartment",
+  "roomCount": 3,
+  "guestCount": 3,
+  "price": 100,
+  "amenities": ["a"],
+  "userId": "1",
+  "latitude": 1,
+  "longitude": 1
+}
