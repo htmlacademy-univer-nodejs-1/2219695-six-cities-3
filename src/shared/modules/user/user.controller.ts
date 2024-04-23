@@ -2,7 +2,7 @@ import {BaseController, HttpMethod} from '../../libs/rest/index.js';
 import {inject, injectable} from 'inversify';
 import {Component} from '../../types/index.js';
 import {Logger} from '../../libs/logger/index.js';
-import {Response} from 'express';
+import {NextFunction, Response} from 'express';
 import {CreateUserRequest} from './create-user-request.type.js';
 
 @injectable()
@@ -18,7 +18,11 @@ export class UserController extends BaseController {
     });
   }
 
-  public create(_req: CreateUserRequest, _res: Response): void {
-    throw new Error('[UserController] Oops');
+  public async create(_req: CreateUserRequest, _res: Response, next: NextFunction): Promise<void> {
+    try {
+      throw new Error('[UserController] Oops');
+    } catch (error) {
+      return next(error);
+    }
   }
 }
