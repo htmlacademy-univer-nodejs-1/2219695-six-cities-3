@@ -18,11 +18,7 @@ export class UserController extends BaseController {
     });
   }
 
-  public async create(_req: CreateUserRequest, _res: Response, next: NextFunction): Promise<void> {
-    try {
-      throw new Error('[UserController] Oops');
-    } catch (error) {
-      return next(error);
-    }
+  public async create(_req: CreateUserRequest, _res: Response, _next: NextFunction): Promise<void> {
+    throw new Error('[UserController] Oops');
   }
 }
