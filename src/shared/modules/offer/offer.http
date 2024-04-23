@@ -12,7 +12,7 @@ Content-Type: application/json
 {
   "title": "titletitle",
   "description": "descriptiondescription",
-  "city": "City",
+  "city": "Paris",
   "postDate": "123",
   "previewImage": "img",
   "photos": ["photo1"],

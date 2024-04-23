@@ -102,7 +102,6 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({
     required: true,
     ref: UserEntity,
-    type: () => String
   })
   public userId: Ref<UserEntity>;
 
