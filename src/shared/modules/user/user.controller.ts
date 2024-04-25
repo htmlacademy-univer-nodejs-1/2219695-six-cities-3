@@ -32,6 +32,24 @@ export class UserController extends BaseController {
       method: HttpMethod.Post,
       handler: this.login
     });
+
+    this.addRoute({
+      path: '/login',
+      method: HttpMethod.Get,
+      handler: this.checkAuth
+    });
+
+    this.addRoute({
+      path: '/:userId/avatar',
+      method: HttpMethod.Post,
+      handler: this.uploadAvatar,
+    });
+
+    this.addRoute({
+      path: '/logout',
+      method: HttpMethod.Delete,
+      handler: this.logout,
+    });
   }
 
   public async create({body}: CreateUserRequest, res: Response): Promise<void> {
@@ -64,6 +82,36 @@ export class UserController extends BaseController {
       StatusCodes.NOT_IMPLEMENTED,
       'Not implemented',
       'UserController',
+    );
+  }
+
+  public async checkAuth({ body: { email }}: LoginUserRequest, res: Response): Promise<void> {
+    const foundedUser = await this.userService.findByEmail(email);
+
+    if (!foundedUser) {
+      throw new HttpError(
+        StatusCodes.UNAUTHORIZED,
+        'Unauthorized',
+        'UserController'
+      );
+    }
+
+    this.ok(res, fillDTO(UserRdo, foundedUser));
+  }
+
+  public async uploadAvatar(): Promise<void> {
+    throw new HttpError(
+      StatusCodes.NOT_IMPLEMENTED,
+      'Not implemented',
+      'UserController'
+    );
+  }
+
+  public async logout(): Promise<void> {
+    throw new HttpError(
+      StatusCodes.NOT_IMPLEMENTED,
+      'Not implemented',
+      'UserController'
     );
   }
 }
