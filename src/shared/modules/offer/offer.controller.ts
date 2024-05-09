@@ -9,12 +9,14 @@ import {OfferRdo} from './rdo/offer.rdo.js';
 import {CreateOfferDto} from './dto/create-offer.dto.js';
 import {UpdateOfferDto} from './dto/update-offer.dto.js';
 import {StatusCodes} from 'http-status-codes';
+import {CommentRdo, CommentService} from '../comment/index.js';
 
 @injectable()
 export class OfferController extends BaseController {
   constructor(
     @inject(Component.Logger) protected readonly logger: Logger,
     @inject(Component.OfferService) private readonly offerService: OfferService,
+    @inject(Component.CommentService) private readonly commentService: CommentService,
   ) {
     super(logger);
 
@@ -73,6 +75,12 @@ export class OfferController extends BaseController {
       method: HttpMethod.Delete,
       handler: this.removeFavorite,
     });
+
+    this.addRoute({
+      path: '/:offerId/comments',
+      method: HttpMethod.Get,
+      handler: this.getComments
+    });
   }
 
   public async index(_req: Request, res: Response): Promise<void> {
@@ -101,6 +109,17 @@ export class OfferController extends BaseController {
   public async delete({ params }: Request, res: Response): Promise<void> {
     const { offerId } = params;
     const offer = await this.offerService.deleteById(offerId);
+
+    if (!offer) {
+      throw new HttpError(
+        StatusCodes.NOT_FOUND,
+        `Offer with id ${offerId} not found.`,
+        'OfferController'
+      );
+    }
+
+    await this.commentService.deleteByOfferId(offerId);
+
     this.noContent(res, offer);
   }
 
@@ -140,18 +159,31 @@ export class OfferController extends BaseController {
   }
 
   public async removeFavorite(req: Request, res: Response): Promise<void> {
-    const id = req.params['id'];
-    const offer = await this.offerService.findById(id);
+    const offerId = req.params['offerId'];
+    const offer = await this.offerService.findById(offerId);
 
     if (offer) {
-      const result = await this.offerService.removeFavorite(id);
+      const result = await this.offerService.removeFavorite(offerId);
       this.ok(res, fillDTO(OfferRdo, result));
     } else {
       throw new HttpError(
         StatusCodes.NOT_FOUND,
-        `Offer with id ${id} not found.`,
+        `Offer with id ${offerId} not found.`,
         'OfferController'
       );
     }
+  }
+
+  public async getComments({params}: Request, res: Response): Promise<void> {
+    if (!await this.offerService.exists(params.offerId)) {
+      throw new HttpError(
+        StatusCodes.NOT_FOUND,
+        `Offer with id ${params.offerId} not found.`,
+        'OfferController'
+      );
+    }
+
+    const comments = await this.commentService.findByOfferId(params.offerId);
+    this.ok(res, fillDTO(CommentRdo, comments));
   }
 }

@@ -28,7 +28,7 @@ export default class CommentController extends BaseController {
   }
 
   public async create({body}: CreateCommentRequest, res: Response): Promise<void> {
-    if (!await this.logger.exists(body.offerId)) {
+    if (!await this.offerService.exists(body.offerId)) {
       throw new HttpError(
         StatusCodes.NOT_FOUND,
         `Offer with id ${body.offerId} not found.`,
