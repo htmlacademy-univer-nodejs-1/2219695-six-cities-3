@@ -45,12 +45,14 @@ export class OfferController extends BaseController {
       path: '/:offerId',
       method: HttpMethod.Patch,
       handler: this.update,
+      middlewares: [new ValidateObjectIdMiddleware('offerId')]
     });
 
     this.addRoute({
       path: '/:offerId',
       method: HttpMethod.Delete,
       handler: this.delete,
+      middlewares: [new ValidateObjectIdMiddleware('offerId')]
     });
 
     this.addRoute({
@@ -69,18 +71,21 @@ export class OfferController extends BaseController {
       path: '/favorites/:offerId',
       method: HttpMethod.Post,
       handler: this.addFavorite,
+      middlewares: [new ValidateObjectIdMiddleware('offerId')]
     });
 
     this.addRoute({
       path: '/favorites/:offerId',
       method: HttpMethod.Delete,
       handler: this.removeFavorite,
+      middlewares: [new ValidateObjectIdMiddleware('offerId')]
     });
 
     this.addRoute({
       path: '/:offerId/comments',
       method: HttpMethod.Get,
-      handler: this.getComments
+      handler: this.getComments,
+      middlewares: [new ValidateObjectIdMiddleware('offerId')]
     });
   }
 

@@ -1,4 +1,4 @@
-import {BaseController, HttpError, HttpMethod} from '../../libs/rest/index.js';
+import {BaseController, HttpError, HttpMethod, ValidateObjectIdMiddleware} from '../../libs/rest/index.js';
 import {inject, injectable} from 'inversify';
 import {Component} from '../../types/index.js';
 import {Logger} from '../../libs/logger/index.js';
@@ -43,6 +43,7 @@ export class UserController extends BaseController {
       path: '/:userId/avatar',
       method: HttpMethod.Post,
       handler: this.uploadAvatar,
+      middlewares: [new ValidateObjectIdMiddleware('userId')]
     });
 
     this.addRoute({
