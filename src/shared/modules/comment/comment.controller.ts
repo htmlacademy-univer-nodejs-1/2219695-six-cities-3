@@ -1,4 +1,4 @@
-import {BaseController, HttpError, HttpMethod} from '../../libs/rest/index.js';
+import {BaseController, HttpError, HttpMethod, ValidateDtoMiddleware} from '../../libs/rest/index.js';
 import {inject, injectable} from 'inversify';
 import {Component} from '../../types/index.js';
 import {Logger} from '../../libs/logger/index.js';
@@ -9,6 +9,7 @@ import {Response} from 'express';
 import {StatusCodes} from 'http-status-codes';
 import {fillDTO} from '../../helpers/index.js';
 import {CommentRdo} from './rdo/comment.rdo.js';
+import {CreateCommentDto} from './dto/create-comment.dto.js';
 
 @injectable()
 export default class CommentController extends BaseController {
@@ -23,7 +24,8 @@ export default class CommentController extends BaseController {
     this.addRoute({
       path: '/',
       method: HttpMethod.Post,
-      handler: this.create
+      handler: this.create,
+      middlewares: [new ValidateDtoMiddleware(CreateCommentDto)]
     });
   }
 

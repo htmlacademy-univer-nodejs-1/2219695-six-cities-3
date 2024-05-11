@@ -9,7 +9,7 @@ export class CommentRdo {
   public text: string;
 
   @Expose()
-  public rating: string;
+  public rating: number;
 
   @Expose({name: 'createdAt'})
   public postDate: string;

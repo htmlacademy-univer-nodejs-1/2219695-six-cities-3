@@ -6,7 +6,7 @@ Content-Type: application/json
 
 {
   "text": "Текст комментария",
-  "rating": "5",
+  "rating": 5,
   "offerId": "628a27d729c45f2bf9f6806a",
   "userId": "628a27d729c45f2bf9f67ff2"
 }
