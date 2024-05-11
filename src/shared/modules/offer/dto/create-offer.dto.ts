@@ -63,7 +63,7 @@ export class CreateOfferDto {
   public price: number;
 
   @IsArray({message: CreateOfferValidationMessage.amenities.invalidFormat})
-  @IsEnum(Amenity, { each: true, message: CreateOfferValidationMessage.amenities.invalidAmenityFormat })
+  @IsEnum(Amenity, {each: true, message: CreateOfferValidationMessage.amenities.invalidAmenityFormat})
   public amenities: Amenity[];
 
   @IsMongoId({message: CreateOfferValidationMessage.userId.invalidId})
