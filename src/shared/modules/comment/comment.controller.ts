@@ -10,6 +10,7 @@ import {StatusCodes} from 'http-status-codes';
 import {fillDTO} from '../../helpers/index.js';
 import {CommentRdo} from './rdo/comment.rdo.js';
 import {CreateCommentDto} from './dto/create-comment.dto.js';
+import {PrivateRouteMiddleware} from '../../libs/rest/middleware/private-route.middleware.js';
 
 @injectable()
 export default class CommentController extends BaseController {
@@ -25,7 +26,10 @@ export default class CommentController extends BaseController {
       path: '/',
       method: HttpMethod.Post,
       handler: this.create,
-      middlewares: [new ValidateDtoMiddleware(CreateCommentDto)]
+      middlewares: [
+        new PrivateRouteMiddleware(),
+        new ValidateDtoMiddleware(CreateCommentDto)
+      ]
     });
   }
 
