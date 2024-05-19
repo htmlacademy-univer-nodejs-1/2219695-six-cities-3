@@ -24,7 +24,7 @@
     "resolvePackageJsonExports": true,
     "resolveJsonModule": true,
     "types": [
-      "node",
+      "node"
     ],
     "lib": [
       "ESNext"
@@ -39,5 +39,6 @@
   ],
   "ts-node": {
     "esm": true
-  }
+  },
+  "files": ["./custom.d.ts"]
 }
