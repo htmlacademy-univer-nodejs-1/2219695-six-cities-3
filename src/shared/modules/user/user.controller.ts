@@ -89,7 +89,8 @@ export class UserController extends BaseController {
     const token = await this.authService.authenticate(user);
     const responseData = fillDTO(LoggedUserRdo, {
       email: user.email,
-      token
+      token,
+      avatar: user.avatar
     });
     this.ok(res, responseData);
   }
