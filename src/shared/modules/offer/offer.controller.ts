@@ -168,7 +168,7 @@ export class OfferController extends BaseController {
   }
 
   public async addFavorite(req: Request, res: Response): Promise<void> {
-    const id = req.params['id'];
+    const id = req.params['offerId'];
     const result = await this.offerService.addFavorite(id);
     this.ok(res, fillDTO(OfferRdo, result));
   }
