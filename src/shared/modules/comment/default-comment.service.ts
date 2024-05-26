@@ -10,8 +10,8 @@ import {DEFAULT_COMMENT_COUNT} from './comment.constant.js';
 export class DefaultCommentService implements CommentService {
   constructor(@inject(Component.CommentModel) private readonly commentModel: types.ModelType<CommentEntity>) {}
 
-  public async create(dto: CreateCommentDto): Promise<DocumentType<CommentEntity>> {
-    const comment = await this.commentModel.create(dto);
+  public async create(offerId: string, dto: CreateCommentDto): Promise<DocumentType<CommentEntity>> {
+    const comment = await this.commentModel.create({...dto, offerId: offerId});
     return comment.populate('user');
   }
 
