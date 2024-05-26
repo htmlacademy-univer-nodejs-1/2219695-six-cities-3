@@ -116,9 +116,9 @@ npm run import
 PORT=5000 - порт на котором запуститься сервер\
 SALT=hello - соль для хеширования\
 DB_HOST=127.0.0.1 - хост базы данных\
-DB_USER=admin - имя пользователя базы данных\
-DB_PASSWORD=test - пароль для подключения к базе данных\
-UPLOAD_DIRECTORY=C:\Users\Dmitriy\Projects\nodejs\2219695-six-cities-3\upload - директория для храния загруженных файлов\
+DB_USER=userName - имя пользователя базы данных\
+DB_PASSWORD=userPassword - пароль для подключения к базе данных\
+UPLOAD_DIRECTORY=C:\Users\<userName>\2219695-six-cities-3\upload - директория для храния загруженных файлов\
 JWT_SECRET=secret - секрет для jwt токена\
 HOST='localhost' - адрес хоста, на котором запускается сервер\
 STATIC_DIRECTORY=static - директория для хранения статических файлов
