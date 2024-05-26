@@ -25,23 +25,23 @@ export class CreateOfferDto {
 
   public previewImage: string;
 
-  @IsArray({message: CreateOfferValidationMessage.photos.invalidFormat})
+  @IsArray({message: CreateOfferValidationMessage.images.invalidFormat})
   public images: string[];
 
-  @IsBoolean({message: CreateOfferValidationMessage.premium.invalidFormat})
+  @IsBoolean({message: CreateOfferValidationMessage.isPremium.invalidFormat})
   public isPremium: boolean;
 
   @IsEnum(OfferType, {message: CreateOfferValidationMessage.type.invalid})
   public type: OfferType;
 
-  @Min(1, {message: CreateOfferValidationMessage.roomCount.minValue})
-  @Max(8, {message: CreateOfferValidationMessage.roomCount.maxValue})
-  @IsNumber({}, {message: CreateOfferValidationMessage.roomCount.invalidFormat})
+  @Min(1, {message: CreateOfferValidationMessage.bedrooms.minValue})
+  @Max(8, {message: CreateOfferValidationMessage.bedrooms.maxValue})
+  @IsNumber({}, {message: CreateOfferValidationMessage.bedrooms.invalidFormat})
   public bedrooms: number;
 
-  @Min(1, {message: CreateOfferValidationMessage.guestCount.minValue})
-  @Max(10, {message: CreateOfferValidationMessage.guestCount.maxValue})
-  @IsNumber({}, {message: CreateOfferValidationMessage.guestCount.invalidFormat})
+  @Min(1, {message: CreateOfferValidationMessage.maxAdults.minValue})
+  @Max(10, {message: CreateOfferValidationMessage.maxAdults.maxValue})
+  @IsNumber({}, {message: CreateOfferValidationMessage.maxAdults.invalidFormat})
   public maxAdults: number;
 
   @Min(100, {message: CreateOfferValidationMessage.price.minValue})
@@ -49,12 +49,12 @@ export class CreateOfferDto {
   @IsNumber({}, {message: CreateOfferValidationMessage.price.invalidFormat})
   public price: number;
 
-  @IsArray({message: CreateOfferValidationMessage.amenities.invalidFormat})
-  @IsEnum(Good, {each: true, message: CreateOfferValidationMessage.amenities.invalidAmenityFormat})
+  @IsArray({message: CreateOfferValidationMessage.goods.invalidFormat})
+  @IsEnum(Good, {each: true, message: CreateOfferValidationMessage.goods.invalidAmenityFormat})
   public goods: Good[];
 
   public host: string;
 
-  @IsObject({message: CreateOfferValidationMessage.longitude.invalidFormat})
+  @IsObject({message: CreateOfferValidationMessage.location.invalidFormat})
   public location: Location;
 }
