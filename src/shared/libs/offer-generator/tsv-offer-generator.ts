@@ -1,5 +1,5 @@
 import {OfferGenerator} from './offer-generator.interface.js';
-import {Amenity, City, MockServerData, OfferType, UserType} from '../../types/index.js';
+import {Good, MockServerData, OfferType, UserType, CityName} from '../../types/index.js';
 import {generateRandomValue, getRandomItem, getRandomItems} from '../../helpers/index.js';
 import dayjs from 'dayjs';
 
@@ -8,32 +8,32 @@ const LAST_WEEK_DAY = 7;
 
 const CITIES_INFO = [
   {
-    city: City.Paris,
+    city: CityName.Paris,
     latitude: 48.85661,
     longitude: 2.351499
   },
   {
-    city: City.Cologne,
+    city: CityName.Cologne,
     latitude: 50.938361,
     longitude: 6.959974
   },
   {
-    city: City.Brussels,
+    city: CityName.Brussels,
     latitude: 50.846557,
     longitude: 4.351697
   },
   {
-    city: City.Amsterdam,
+    city: CityName.Amsterdam,
     latitude: 52.370216,
     longitude: 4.895168
   },
   {
-    city: City.Hamburg,
+    city: CityName.Hamburg,
     latitude: 53.550341,
     longitude: 10.000654
   },
   {
-    city: City.Dusseldorf,
+    city: CityName.Dusseldorf,
     latitude: 51.225402,
     longitude: 6.776314
   }
@@ -42,11 +42,11 @@ const CITIES_INFO = [
 const MIN_RATING = 1;
 const MAX_RATING = 5;
 
-const MIN_ROOM_COUNT = 1;
-const MAX_ROOM_COUNT = 8;
+const MIN_BEDROOMS = 1;
+const MAX_BEDROOMS = 8;
 
-const MIN_GUEST_COUNT = 1;
-const MAX_GUEST_COUNT = 10;
+const MIN_ADULTS = 1;
+const MAX_ADULTS = 10;
 
 const MIN_PRICE = 100;
 const MAX_PRICE = 100000;
@@ -64,9 +64,9 @@ export class TSVOfferGenerator implements OfferGenerator {
 
     const cityInfo = getRandomItem(CITIES_INFO);
     const previewImage = getRandomItem<string>(this.mockData.previewImages);
-    const photos = getRandomItems<string>(this.mockData.photos).join(';');
-    const premium = getRandomItem<string>(['true', 'false']);
-    const favorite = getRandomItem<string>(['true', 'false']);
+    const images = getRandomItems<string>(this.mockData.photos).join(';');
+    const isPremium = getRandomItem<string>(['true', 'false']);
+    const isFavorite = getRandomItem<string>(['true', 'false']);
     const rating = generateRandomValue(MIN_RATING, MAX_RATING, 1).toString();
     const type = getRandomItem([
       OfferType.Apartment,
@@ -74,23 +74,23 @@ export class TSVOfferGenerator implements OfferGenerator {
       OfferType.House,
       OfferType.Room
     ]);
-    const roomCount = generateRandomValue(MIN_ROOM_COUNT, MAX_ROOM_COUNT).toString();
-    const guestCount = generateRandomValue(MIN_GUEST_COUNT, MAX_GUEST_COUNT).toString();
+    const bedrooms = generateRandomValue(MIN_BEDROOMS, MAX_BEDROOMS).toString();
+    const maxAdults = generateRandomValue(MIN_ADULTS, MAX_ADULTS).toString();
     const price = generateRandomValue(MIN_PRICE, MAX_PRICE).toString();
-    const amenities = getRandomItems([
-      Amenity.AirConditioning,
-      Amenity.Fridge,
-      Amenity.Towels,
-      Amenity.BabySeat,
-      Amenity.Washer,
-      Amenity.Breakfast,
-      Amenity.LaptopFriendlyWorkspace
+    const goods = getRandomItems([
+      Good.AirConditioning,
+      Good.Fridge,
+      Good.Towels,
+      Good.BabySeat,
+      Good.Washer,
+      Good.Breakfast,
+      Good.LaptopFriendlyWorkspace
     ]).join(';');
     const name = getRandomItem<string>(this.mockData.names);
     const email = getRandomItem<string>(this.mockData.emails);
-    const avatar = getRandomItem<string>(this.mockData.avatars);
+    const avatarUrl = getRandomItem<string>(this.mockData.avatars);
     const userType = getRandomItem([
-      UserType.Normal,
+      UserType.Regular,
       UserType.Pro
     ]);
 
@@ -102,18 +102,18 @@ export class TSVOfferGenerator implements OfferGenerator {
       postDate,
       city,
       previewImage,
-      photos,
-      premium,
-      favorite,
+      images,
+      isPremium,
+      isFavorite,
       rating,
       type,
-      roomCount,
-      guestCount,
+      bedrooms,
+      maxAdults,
       price,
-      amenities,
+      goods,
       name,
       email,
-      avatar,
+      avatarUrl,
       userType,
       latitude,
       longitude

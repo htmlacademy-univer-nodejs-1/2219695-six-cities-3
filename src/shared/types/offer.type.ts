@@ -1,27 +1,24 @@
-import {City} from './city.enum';
 import {OfferType} from './offer-type.enum';
 import {User} from './user.type';
-import {Coordinates} from './coordinates.type';
-import {Amenity} from './amenity.enum';
+import {Good} from './good.enum.js';
+import {City} from './city.type.js';
+import {Location} from './location.type.js';
 
 export type Offer = {
   title: string;
   description: string;
   postDate: Date;
   city: City;
+  location: Location;
   previewImage: string;
-  photos: string[];
-  premium: boolean;
-  favorite: boolean;
+  images: string[];
+  isPremium: boolean;
+  isFavorite: boolean;
   rating: number;
   type: OfferType;
-  roomCount: number;
-  guestCount: number;
+  bedrooms: number;
+  maxAdults: number;
   price: number;
-  amenities: Amenity[];
-  user: User;
-  commentCount: number;
-  coordinates: Coordinates;
+  goods: Good[];
+  host: User;
 }
-
-//TODO: Возможно стоит сделать тип City, в у него поля с названием города, и координатами

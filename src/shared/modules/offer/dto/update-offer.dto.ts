@@ -1,10 +1,10 @@
-import {Amenity, City, OfferType} from '../../../types/index.js';
+import {Good, City, OfferType, Location} from '../../../types/index.js';
 import {
   IsArray,
   IsBoolean,
   IsDateString,
   IsEnum,
-  IsNumber,
+  IsNumber, IsObject,
   IsOptional,
   Max,
   MaxLength,
@@ -29,7 +29,7 @@ export class UpdateOfferDto {
   public postDate?: Date;
 
   @IsOptional()
-  @IsEnum(City, {message: UpdateOfferValidationMessage.city.invalid})
+  @IsObject({message: UpdateOfferValidationMessage.city.invalid})
   public city?: City;
 
   @IsOptional()
@@ -37,15 +37,15 @@ export class UpdateOfferDto {
 
   @IsOptional()
   @IsArray({message: UpdateOfferValidationMessage.photos.invalidFormat})
-  public photos?: string[];
+  public images?: string[];
 
   @IsOptional()
   @IsBoolean({message: UpdateOfferValidationMessage.premium.invalidFormat})
-  public premium?: boolean;
+  public isPremium?: boolean;
 
   @IsOptional()
   @IsBoolean({message: UpdateOfferValidationMessage.favorite.invalidFormat})
-  public favorite?: boolean;
+  public isFavorite?: boolean;
 
   @IsOptional()
   @Min(1, {message: UpdateOfferValidationMessage.rating.minValue})
@@ -61,13 +61,13 @@ export class UpdateOfferDto {
   @Min(1, {message: UpdateOfferValidationMessage.roomCount.minValue})
   @Max(8, {message: UpdateOfferValidationMessage.roomCount.maxValue})
   @IsNumber({}, {message: UpdateOfferValidationMessage.roomCount.invalidFormat})
-  public roomCount?: number;
+  public bedrooms?: number;
 
   @IsOptional()
   @Min(1, {message: UpdateOfferValidationMessage.guestCount.minValue})
   @Max(10, {message: UpdateOfferValidationMessage.guestCount.maxValue})
   @IsNumber({}, {message: UpdateOfferValidationMessage.guestCount.invalidFormat})
-  public guestCount?: number;
+  public maxAdults?: number;
 
   @IsOptional()
   @Min(100, {message: UpdateOfferValidationMessage.price.minValue})
@@ -77,14 +77,10 @@ export class UpdateOfferDto {
 
   @IsOptional()
   @IsArray({message: UpdateOfferValidationMessage.amenities.invalidFormat})
-  @IsEnum(Amenity, {each: true, message: UpdateOfferValidationMessage.amenities.invalidAmenityFormat})
-  public amenities?: Amenity[];
+  @IsEnum(Good, {each: true, message: UpdateOfferValidationMessage.amenities.invalidAmenityFormat})
+  public goods?: Good[];
 
   @IsOptional()
   @IsNumber({}, {message: UpdateOfferValidationMessage.latitude.invalidFormat})
-  public latitude?: number;
-
-  @IsOptional()
-  @IsNumber({}, {message: UpdateOfferValidationMessage.longitude.invalidFormat})
-  public longitude?: number;
+  public location?: Location;
 }

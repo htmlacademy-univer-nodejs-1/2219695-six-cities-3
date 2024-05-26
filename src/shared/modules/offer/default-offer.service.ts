@@ -25,7 +25,7 @@ export class DefaultOfferService implements OfferService {
   public async findById(offerId: string): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
       .findById(offerId)
-      .populate('userId')
+      .populate('host')
       .exec();
   }
 
@@ -35,7 +35,7 @@ export class DefaultOfferService implements OfferService {
       .find()
       .sort({createdAt: SortType.Down})
       .limit(limit)
-      .populate('userId')
+      .populate('host')
       .exec();
   }
 
@@ -48,7 +48,7 @@ export class DefaultOfferService implements OfferService {
   public async updateById(offerId: string, dto: UpdateOfferDto): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
       .findByIdAndUpdate(offerId, dto, {new: true})
-      .populate('userId')
+      .populate('host')
       .exec();
   }
 
@@ -71,28 +71,28 @@ export class DefaultOfferService implements OfferService {
       .find({ isPremium: true, city })
       .sort({ createdAt: SortType.Down })
       .limit(PREMIUM_OFFER_COUNT)
-      .populate('userId')
+      .populate('host')
       .exec();
   }
 
   public async findFavorite(): Promise<DocumentType<OfferEntity>[] | null> {
     return this.offerModel
       .find({ isFavorite: true })
-      .populate('userId')
+      .populate('host')
       .exec();
   }
 
   public async addFavorite(offerId: string): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
       .findByIdAndUpdate(offerId, { isFavorite: true }, { new: true })
-      .populate('userId')
+      .populate('host')
       .exec();
   }
 
   public async removeFavorite(offerId: string): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
       .findByIdAndUpdate(offerId, { isFavorite: false }, { new: true })
-      .populate('userId')
+      .populate('host')
       .exec();
   }
 }

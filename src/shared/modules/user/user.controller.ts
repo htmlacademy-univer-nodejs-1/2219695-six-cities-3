@@ -21,6 +21,7 @@ import {LoginUserDto} from './dto/login-user.dto.js';
 import {AuthService} from '../auth/index.js';
 import {LoggedUserRdo} from './rdo/logged-user.rdo.js';
 import {UploadUserAvatarRdo} from './rdo/upload-user-avatar.rdo.js';
+import {RegisteredUserRdo} from './rdo/registered-user.rdo.js';
 
 @injectable()
 export class UserController extends BaseController {
@@ -82,7 +83,7 @@ export class UserController extends BaseController {
     }
 
     const result = await this.userService.create(body, this.configService.get('SALT'));
-    this.created(res, fillDTO(UserRdo, result));
+    this.created(res, fillDTO(RegisteredUserRdo, result));
   }
 
   public async login({body}: LoginUserRequest, res: Response): Promise<void> {
@@ -91,7 +92,7 @@ export class UserController extends BaseController {
     const responseData = fillDTO(LoggedUserRdo, {
       email: user.email,
       token,
-      avatar: user.avatar
+      avatar: user.avatarUrl
     });
     this.ok(res, responseData);
   }
@@ -117,11 +118,7 @@ export class UserController extends BaseController {
     this.created(res, fillDTO(UploadUserAvatarRdo, {filepath: uploadFile.avatarPath}));
   }
 
-  public async logout(): Promise<void> {
-    throw new HttpError(
-      StatusCodes.NOT_IMPLEMENTED,
-      'Not implemented',
-      'UserController'
-    );
+  public async logout(_req: Request, res: Response): Promise<void> {
+    this.ok(res, null);
   }
 }

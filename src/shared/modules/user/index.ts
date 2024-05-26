@@ -5,3 +5,4 @@ export * from './user.controller.js';
 export * from './rdo/logged-user.rdo.js';
 export * from './user-service.interface.js';
 export * from './user.constant.js';
+export * from './rdo/registered-user.rdo.js';

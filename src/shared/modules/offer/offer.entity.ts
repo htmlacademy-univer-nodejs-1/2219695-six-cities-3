@@ -1,5 +1,5 @@
 import {defaultClasses, getModelForClass, modelOptions, prop, Ref} from '@typegoose/typegoose';
-import {Amenity, City, OfferType} from '../../types/index.js';
+import {Good, City, OfferType, Location} from '../../types/index.js';
 import {UserEntity} from '../user/index.js';
 
 export interface OfferEntity extends defaultClasses.Base {}
@@ -32,8 +32,7 @@ export class OfferEntity extends defaultClasses.TimeStamps {
 
   @prop({
     required: true,
-    type: () => String,
-    enum: City
+    type: () => Object,
   })
   public city: City;
 
@@ -48,19 +47,19 @@ export class OfferEntity extends defaultClasses.TimeStamps {
     default: [],
     type: () => Array<string>,
   })
-  public photos: string[];
+  public images: string[];
 
   @prop({
     required: true,
     type: () => Boolean,
   })
-  public premium: boolean;
+  public isPremium: boolean;
 
   @prop({
     required: true,
     type: () => Boolean,
   })
-  public favorite: boolean;
+  public isFavorite: boolean;
 
   @prop({
     required: true,
@@ -79,13 +78,13 @@ export class OfferEntity extends defaultClasses.TimeStamps {
     required: true,
     type: () => Number,
   })
-  public roomCount: number;
+  public bedrooms: number;
 
   @prop({
     required: true,
     type: () => Number,
   })
-  public guestCount: number;
+  public maxAdults: number;
 
   @prop({
     required: true,
@@ -97,13 +96,13 @@ export class OfferEntity extends defaultClasses.TimeStamps {
     required: true,
     type: () => Array<string>,
   })
-  public amenities: Amenity[];
+  public goods: Good[];
 
   @prop({
     required: true,
     ref: UserEntity,
   })
-  public userId: Ref<UserEntity>;
+  public host: Ref<UserEntity>;
 
   @prop({
     type: () => Number,
@@ -113,15 +112,9 @@ export class OfferEntity extends defaultClasses.TimeStamps {
 
   @prop({
     required: true,
-    type: () => Number,
+    type: () => Object,
   })
-  public latitude: number;
-
-  @prop({
-    required: true,
-    type: () => Number,
-  })
-  public longitude: number;
+  public location: Location;
 }
 
 export const OfferModel = getModelForClass(OfferEntity);
