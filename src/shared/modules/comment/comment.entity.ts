@@ -17,11 +17,11 @@ export class CommentEntity extends defaultClasses.TimeStamps {
   })
   public comment: string;
 
-  @prop({
-    required: true,
-    type: () => Date
-  })
-  public date: Date;
+  // @prop({
+  //   required: true,
+  //   type: () => Date
+  // })
+  // public date: Date;
 
   @prop({
     required: true,

@@ -43,6 +43,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRvcmFuczFAb3Zlcmxvb2sub
 ###
 
 ## Список комментариев к объявлению
-GET http://localhost:5000/offers/6606c53d23a108584837b5b0/comments HTTP/1.1
+GET http://localhost:5000/offers/665337d05e0900f8b02064d5/comments HTTP/1.1
 
 ###

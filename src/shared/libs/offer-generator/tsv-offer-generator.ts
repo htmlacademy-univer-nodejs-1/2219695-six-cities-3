@@ -95,6 +95,7 @@ export class TSVOfferGenerator implements OfferGenerator {
     ]);
 
     const {city, latitude, longitude} = cityInfo;
+    const location = `${latitude};${longitude}`;
 
     return [
       title,
@@ -115,8 +116,7 @@ export class TSVOfferGenerator implements OfferGenerator {
       email,
       avatarUrl,
       userType,
-      latitude,
-      longitude
+      location
     ].join('\t');
   }
 }

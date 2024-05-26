@@ -8,8 +8,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRvcmFuczFAb3Zlcmxvb2sub
 {
   "comment": "Текст комментария",
   "rating": 5,
-  "offerId": "66532eb8aedaa8ac849088ee",
-  "userId": "66532d80aedaa8ac849088e8"
+  "offerId": "665337d05e0900f8b02064d5",
+  "user": "6606d17076fbd35e9535bfbc"
 }
 
 ###
