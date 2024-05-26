@@ -28,13 +28,13 @@ export class OfferController extends BaseController {
     this.logger.info('Register routes for CategoryController…');
 
     this.addRoute({
-      path: '/',
+      path: '/offers',
       method: HttpMethod.Get,
       handler: this.index
     });
 
     this.addRoute({
-      path: '/',
+      path: '/offers',
       method: HttpMethod.Post,
       handler: this.create,
       middlewares: [
@@ -44,7 +44,7 @@ export class OfferController extends BaseController {
     });
 
     this.addRoute({
-      path: '/:offerId',
+      path: '/offers/:offerId',
       method: HttpMethod.Get,
       handler: this.show,
       middlewares: [
@@ -54,7 +54,7 @@ export class OfferController extends BaseController {
     });
 
     this.addRoute({
-      path: '/:offerId',
+      path: '/offers/:offerId',
       method: HttpMethod.Patch,
       handler: this.update,
       middlewares: [
@@ -66,7 +66,7 @@ export class OfferController extends BaseController {
     });
 
     this.addRoute({
-      path: '/:offerId',
+      path: '/offers/:offerId',
       method: HttpMethod.Delete,
       handler: this.delete,
       middlewares: [
@@ -114,7 +114,7 @@ export class OfferController extends BaseController {
     });
 
     this.addRoute({
-      path: '/:offerId/comments',
+      path: '/offers/:offerId/comments',
       method: HttpMethod.Get,
       handler: this.getComments,
       middlewares: [

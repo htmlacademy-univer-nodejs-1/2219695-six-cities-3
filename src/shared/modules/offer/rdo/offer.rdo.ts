@@ -48,7 +48,7 @@ export class OfferRdo {
   @Expose()
   public goods: string[];
 
-  @Expose({ name: 'user'})
+  @Expose({ name: 'host'})
   @Type(() => UserRdo)
   public host: UserRdo;
 

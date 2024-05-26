@@ -2,9 +2,7 @@ import {Good, City, OfferType, Location} from '../../../types/index.js';
 import {
   IsArray,
   IsBoolean,
-  IsDateString,
   IsEnum,
-  IsMongoId,
   IsNumber, IsObject,
   Max,
   MaxLength,
@@ -22,9 +20,6 @@ export class CreateOfferDto {
   @MaxLength(1024, {message: CreateOfferValidationMessage.description.maxLength})
   public description: string;
 
-  @IsDateString({}, {message: CreateOfferValidationMessage.postDate.invalidFormat})
-  public postDate: Date;
-
   @IsObject({message: CreateOfferValidationMessage.city.invalid})
   public city: City;
 
@@ -35,14 +30,6 @@ export class CreateOfferDto {
 
   @IsBoolean({message: CreateOfferValidationMessage.premium.invalidFormat})
   public isPremium: boolean;
-
-  @IsBoolean({message: CreateOfferValidationMessage.favorite.invalidFormat})
-  public isFavorite: boolean;
-
-  @Min(1, {message: CreateOfferValidationMessage.rating.minValue})
-  @Max(5, {message: CreateOfferValidationMessage.rating.maxValue})
-  @IsNumber({maxDecimalPlaces: 1}, {message: CreateOfferValidationMessage.rating.invalidFormat})
-  public rating: number;
 
   @IsEnum(OfferType, {message: CreateOfferValidationMessage.type.invalid})
   public type: OfferType;
@@ -66,7 +53,6 @@ export class CreateOfferDto {
   @IsEnum(Good, {each: true, message: CreateOfferValidationMessage.amenities.invalidAmenityFormat})
   public goods: Good[];
 
-  @IsMongoId({message: CreateOfferValidationMessage.userId.invalidId})
   public host: string;
 
   @IsObject({message: CreateOfferValidationMessage.longitude.invalidFormat})
