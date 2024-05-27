@@ -1,10 +1,10 @@
-import {Amenity, City, OfferType} from '../../../types/index.js';
+import {Good, City, OfferType, Location} from '../../../types/index.js';
 import {
   IsArray,
   IsBoolean,
   IsDateString,
   IsEnum,
-  IsNumber,
+  IsNumber, IsObject,
   IsOptional,
   Max,
   MaxLength,
@@ -29,23 +29,23 @@ export class UpdateOfferDto {
   public postDate?: Date;
 
   @IsOptional()
-  @IsEnum(City, {message: UpdateOfferValidationMessage.city.invalid})
+  @IsObject({message: UpdateOfferValidationMessage.city.invalid})
   public city?: City;
 
   @IsOptional()
   public previewImage?: string;
 
   @IsOptional()
-  @IsArray({message: UpdateOfferValidationMessage.photos.invalidFormat})
-  public photos?: string[];
+  @IsArray({message: UpdateOfferValidationMessage.images.invalidFormat})
+  public images?: string[];
 
   @IsOptional()
-  @IsBoolean({message: UpdateOfferValidationMessage.premium.invalidFormat})
-  public premium?: boolean;
+  @IsBoolean({message: UpdateOfferValidationMessage.isPremium.invalidFormat})
+  public isPremium?: boolean;
 
   @IsOptional()
-  @IsBoolean({message: UpdateOfferValidationMessage.favorite.invalidFormat})
-  public favorite?: boolean;
+  @IsBoolean({message: UpdateOfferValidationMessage.isFavorite.invalidFormat})
+  public isFavorite?: boolean;
 
   @IsOptional()
   @Min(1, {message: UpdateOfferValidationMessage.rating.minValue})
@@ -58,16 +58,16 @@ export class UpdateOfferDto {
   public type?: OfferType;
 
   @IsOptional()
-  @Min(1, {message: UpdateOfferValidationMessage.roomCount.minValue})
-  @Max(8, {message: UpdateOfferValidationMessage.roomCount.maxValue})
-  @IsNumber({}, {message: UpdateOfferValidationMessage.roomCount.invalidFormat})
-  public roomCount?: number;
+  @Min(1, {message: UpdateOfferValidationMessage.bedrooms.minValue})
+  @Max(8, {message: UpdateOfferValidationMessage.bedrooms.maxValue})
+  @IsNumber({}, {message: UpdateOfferValidationMessage.bedrooms.invalidFormat})
+  public bedrooms?: number;
 
   @IsOptional()
-  @Min(1, {message: UpdateOfferValidationMessage.guestCount.minValue})
-  @Max(10, {message: UpdateOfferValidationMessage.guestCount.maxValue})
-  @IsNumber({}, {message: UpdateOfferValidationMessage.guestCount.invalidFormat})
-  public guestCount?: number;
+  @Min(1, {message: UpdateOfferValidationMessage.maxAdults.minValue})
+  @Max(10, {message: UpdateOfferValidationMessage.maxAdults.maxValue})
+  @IsNumber({}, {message: UpdateOfferValidationMessage.maxAdults.invalidFormat})
+  public maxAdults?: number;
 
   @IsOptional()
   @Min(100, {message: UpdateOfferValidationMessage.price.minValue})
@@ -76,15 +76,11 @@ export class UpdateOfferDto {
   public price?: number;
 
   @IsOptional()
-  @IsArray({message: UpdateOfferValidationMessage.amenities.invalidFormat})
-  @IsEnum(Amenity, {each: true, message: UpdateOfferValidationMessage.amenities.invalidAmenityFormat})
-  public amenities?: Amenity[];
+  @IsArray({message: UpdateOfferValidationMessage.goods.invalidFormat})
+  @IsEnum(Good, {each: true, message: UpdateOfferValidationMessage.goods.invalidAmenityFormat})
+  public goods?: Good[];
 
   @IsOptional()
-  @IsNumber({}, {message: UpdateOfferValidationMessage.latitude.invalidFormat})
-  public latitude?: number;
-
-  @IsOptional()
-  @IsNumber({}, {message: UpdateOfferValidationMessage.longitude.invalidFormat})
-  public longitude?: number;
+  @IsNumber({}, {message: UpdateOfferValidationMessage.location.invalidFormat})
+  public location?: Location;
 }

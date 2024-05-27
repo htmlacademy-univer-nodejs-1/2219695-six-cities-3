@@ -7,37 +7,26 @@ export const CreateOfferValidationMessage = {
     minLength: 'Minimum description length must be 20',
     maxLength: 'Maximum description length must be 1024',
   },
-  postDate: {
-    invalidFormat: 'postDate must be a valid ISO date',
-  },
   city: {
-    invalid: 'city must be value from City Enum',
+    invalid: 'city must be Object',
   },
-  photos: {
+  images: {
     invalidFormat: 'Images must be an array',
   },
-  premium: {
+  isPremium: {
     invalidFormat: 'Must be Boolean',
-  },
-  favorite: {
-    invalidFormat: 'Must be Boolean',
-  },
-  rating: {
-    minValue: 'Minimum price is 1',
-    maxValue: 'Maximum price is 5',
-    invalidFormat: 'Must be Number',
   },
   type: {
     invalid: 'type must be value from OfferType Enum',
   },
-  roomCount: {
-    minValue: 'Minimum roomCount is 1',
-    maxValue: 'Maximum roomCount is 8',
+  bedrooms: {
+    minValue: 'Minimum bedrooms is 1',
+    maxValue: 'Maximum bedrooms is 8',
     invalidFormat: 'Must be Number',
   },
-  guestCount: {
-    minValue: 'Minimum guestCount is 1',
-    maxValue: 'Maximum guestCount is 10',
+  maxAdults: {
+    minValue: 'Minimum maxAdults is 1',
+    maxValue: 'Maximum maxAdults is 10',
     invalidFormat: 'Must be Number',
   },
   price: {
@@ -45,18 +34,12 @@ export const CreateOfferValidationMessage = {
     maxValue: 'Maximum price is 100000',
     invalidFormat: 'Price must be an Number',
   },
-  amenities: {
+  goods: {
     invalidFormat: 'Must be an array',
-    invalidAmenityFormat: 'amenity must be value from Amenity Enum'
+    invalidAmenityFormat: 'good must be value from Good Enum'
   },
-  userId: {
-    invalidId: 'userId field must be a valid id',
+  location: {
+    invalidFormat: 'location must be Object',
   },
-  latitude: {
-    invalidFormat: 'Must be Number',
-  },
-  longitude: {
-    invalidFormat: 'Must be Number',
-  }
 } as const;
 

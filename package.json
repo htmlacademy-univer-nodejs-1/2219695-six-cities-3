@@ -9,18 +9,21 @@
   ],
   "main": "main.js",
   "scripts": {
-    "start": "npm run build && node ./dist/main.rest.js",
+    "start": "npm run build && node ./dist/src/main.rest.js",
     "start:dev": "nodemon",
     "build": "npm run clean && npm run compile",
     "lint": "eslint src/ --ext .ts",
     "compile": "tsc -p tsconfig.json",
     "clean": "rimraf dist",
     "ts": "ts-node",
-    "mock:server": "json-server ./mocks/mock-server-data.json -p 3123"
+    "mock:server": "json-server ./mocks/mock-server-data.json -p 3123",
+    "generate": "tsx ./src/main.cli.ts --generate 100 ./mocks/test-data.tsv http://localhost:3123/api",
+    "import": "tsx ./src/main.cli.ts -- --import ./mocks/test-data.tsv admin test 127.0.0.1 six-cities hello"
   },
   "devDependencies": {
     "@types/convict": "^6.1.6",
     "@types/convict-format-with-validator": "^6.0.5",
+    "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/mime-types": "^2.1.4",
     "@types/multer": "^1.4.11",
@@ -49,6 +52,7 @@
     "class-validator": "^0.14.1",
     "convict": "^6.2.4",
     "convict-format-with-validator": "^6.2.0",
+    "cors": "^2.8.5",
     "dayjs": "^1.11.10",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",

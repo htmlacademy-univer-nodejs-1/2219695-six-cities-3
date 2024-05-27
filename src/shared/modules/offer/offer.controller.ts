@@ -28,13 +28,13 @@ export class OfferController extends BaseController {
     this.logger.info('Register routes for CategoryController…');
 
     this.addRoute({
-      path: '/',
+      path: '/offers',
       method: HttpMethod.Get,
       handler: this.index
     });
 
     this.addRoute({
-      path: '/',
+      path: '/offers',
       method: HttpMethod.Post,
       handler: this.create,
       middlewares: [
@@ -44,7 +44,7 @@ export class OfferController extends BaseController {
     });
 
     this.addRoute({
-      path: '/:offerId',
+      path: '/offers/:offerId',
       method: HttpMethod.Get,
       handler: this.show,
       middlewares: [
@@ -54,7 +54,7 @@ export class OfferController extends BaseController {
     });
 
     this.addRoute({
-      path: '/:offerId',
+      path: '/offers/:offerId',
       method: HttpMethod.Patch,
       handler: this.update,
       middlewares: [
@@ -66,7 +66,7 @@ export class OfferController extends BaseController {
     });
 
     this.addRoute({
-      path: '/:offerId',
+      path: '/offers/:offerId',
       method: HttpMethod.Delete,
       handler: this.delete,
       middlewares: [
@@ -114,7 +114,7 @@ export class OfferController extends BaseController {
     });
 
     this.addRoute({
-      path: '/:offerId/comments',
+      path: '/offers/:offerId/comments',
       method: HttpMethod.Get,
       handler: this.getComments,
       middlewares: [
@@ -131,7 +131,7 @@ export class OfferController extends BaseController {
   }
 
   public async create({body, tokenPayload}: Request<Record<string, unknown>, Record<string, unknown>, CreateOfferDto>, res: Response): Promise<void> {
-    const result = await this.offerService.create({...body, userId: tokenPayload.id});
+    const result = await this.offerService.create({...body, host: tokenPayload.id});
     const responseData = fillDTO(OfferRdo, result);
     this.created(res, responseData);
   }
@@ -168,7 +168,7 @@ export class OfferController extends BaseController {
   }
 
   public async addFavorite(req: Request, res: Response): Promise<void> {
-    const id = req.params['id'];
+    const id = req.params['offerId'];
     const result = await this.offerService.addFavorite(id);
     this.ok(res, fillDTO(OfferRdo, result));
   }

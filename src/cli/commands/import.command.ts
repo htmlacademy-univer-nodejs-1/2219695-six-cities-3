@@ -2,7 +2,7 @@ import {Command} from './command.interface.js';
 import {TSVFileReader} from '../../shared/libs/file-reader/index.js';
 import chalk from 'chalk';
 import {createOffer, getErrorMessage, getMongoURI} from '../../shared/helpers/index.js';
-import {UserService} from '../../shared/modules/user/user-service.interface.js';
+import {UserService} from '../../shared/modules/user/index.js';
 import {DefaultOfferService, OfferModel, OfferService} from '../../shared/modules/offer/index.js';
 import {DatabaseClient, MongoDatabaseClient} from '../../shared/libs/database-client/index.js';
 import {Logger} from '../../shared/libs/logger/index.js';
@@ -41,7 +41,7 @@ export class ImportCommand implements Command {
 
   private async saveOffer(offer: Offer) {
     const user = await this.userService.findOrCreate({
-      ...offer.user,
+      ...offer.host,
       password: DEFAULT_USER_PASSWORD
     }, this.salt);
 
@@ -51,18 +51,17 @@ export class ImportCommand implements Command {
       postDate: offer.postDate,
       city: offer.city,
       previewImage: offer.previewImage,
-      photos: [...offer.photos],
-      premium: offer.premium,
-      favorite: offer.favorite,
+      images: [...offer.images],
+      isPremium: offer.isPremium,
+      isFavorite: offer.isFavorite,
       rating: offer.rating,
       type: offer.type,
-      roomCount: offer.roomCount,
-      guestCount: offer.guestCount,
+      bedrooms: offer.bedrooms,
+      maxAdults: offer.maxAdults,
       price: offer.price,
-      amenities: [...offer.amenities],
-      userId: user.id,
-      latitude: offer.coordinates.latitude,
-      longitude: offer.coordinates.longitude
+      goods: [...offer.goods],
+      host: user.id,
+      location: offer.location
     });
   }
 

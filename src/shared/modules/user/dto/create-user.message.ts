@@ -6,9 +6,6 @@ export const CreateUserMessage = {
   email: {
     invalidFormat: 'email must be a valid address'
   },
-  avatar: {
-    invalidFormat: 'avatar is required',
-  },
   type: {
     invalidFormat: 'type must be value from UserType Enum'
   },

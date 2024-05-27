@@ -20,6 +20,8 @@ import {CreateUserDto} from './dto/create-user.dto.js';
 import {LoginUserDto} from './dto/login-user.dto.js';
 import {AuthService} from '../auth/index.js';
 import {LoggedUserRdo} from './rdo/logged-user.rdo.js';
+import {UploadUserAvatarRdo} from './rdo/upload-user-avatar.rdo.js';
+import {RegisteredUserRdo} from './rdo/registered-user.rdo.js';
 
 @injectable()
 export class UserController extends BaseController {
@@ -81,7 +83,7 @@ export class UserController extends BaseController {
     }
 
     const result = await this.userService.create(body, this.configService.get('SALT'));
-    this.created(res, fillDTO(UserRdo, result));
+    this.created(res, fillDTO(RegisteredUserRdo, result));
   }
 
   public async login({body}: LoginUserRequest, res: Response): Promise<void> {
@@ -89,7 +91,8 @@ export class UserController extends BaseController {
     const token = await this.authService.authenticate(user);
     const responseData = fillDTO(LoggedUserRdo, {
       email: user.email,
-      token
+      token,
+      avatar: user.avatarUrl
     });
     this.ok(res, responseData);
   }
@@ -108,17 +111,14 @@ export class UserController extends BaseController {
     this.ok(res, fillDTO(UserRdo, foundedUser));
   }
 
-  public async uploadAvatar(req: Request, res: Response): Promise<void> {
-    this.created(res, {
-      filepath: req.file?.path
-    });
+  public async uploadAvatar({params, file}: Request, res: Response): Promise<void> {
+    const {userId} = params;
+    const uploadFile = {avatarPath: file?.filename};
+    await this.userService.updateById(userId, uploadFile);
+    this.created(res, fillDTO(UploadUserAvatarRdo, {filepath: uploadFile.avatarPath}));
   }
 
-  public async logout(): Promise<void> {
-    throw new HttpError(
-      StatusCodes.NOT_IMPLEMENTED,
-      'Not implemented',
-      'UserController'
-    );
+  public async logout(_req: Request, res: Response): Promise<void> {
+    this.ok(res, null);
   }
 }
