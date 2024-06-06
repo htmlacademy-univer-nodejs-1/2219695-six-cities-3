@@ -21,7 +21,6 @@
     "sourceMap": true,
     "outDir": "./dist",
     "emitDecoratorMetadata": true,
-    "resolvePackageJsonExports": true,
     "resolveJsonModule": true,
     "types": [
       "node"
